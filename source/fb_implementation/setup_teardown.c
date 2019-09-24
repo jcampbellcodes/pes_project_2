@@ -3,19 +3,37 @@
 //
 
 #include "setup_teardown.h"
+#include "fsl_debug_console.h"
+#include "MKL25Z4.h"
+#include "board.h"
+#include "peripherals.h"
+#include "pin_mux.h"
+#include "clock_config.h"
 
 void initialize()
 {
+	/* board setup */
+	BOARD_InitBootPins();
+	BOARD_InitBootClocks();
+	BOARD_InitBootPeripherals();
+
+	/* led setup */
+	LED_RED_INIT(1);
+	LED_BLUE_INIT(1);
+	LED_GREEN_INIT(1);
+
+	/* serial debug console setup: use PRINTF("debug msg"); */
+	BOARD_InitDebugConsole();
+
 #ifdef DEBUG
-    // send serial message “program start” TODO
+	PRINTF("program start");
 #endif
 
-    // initialize pin; output and direction TODO
 }
 
 void terminate()
 {
 #ifdef DEBUG
-    //send serial message “program end” TODO
+	PRINTF("program end");
 #endif
 }

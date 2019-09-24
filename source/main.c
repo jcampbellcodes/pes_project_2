@@ -6,14 +6,6 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-/* freedom board includes */
-#include "fsl_debug_console.h"
-#include "MKL25Z4.h"
-#include "board.h"
-#include "peripherals.h"
-#include "pin_mux.h"
-#include "clock_config.h"
-
 #define NUM_CYCLES 10
 #define NUM_COLOR_STEPS 3
 #define STEPS_PER_CYCLE 20
@@ -40,24 +32,7 @@ static const int TIMINGS[STEPS_PER_CYCLE] = {
         600
 };
 
-void init() {
-	/* board setup */
-    BOARD_InitBootPins();
-    BOARD_InitBootClocks();
-    BOARD_InitBootPeripherals();
 
-    /* led setup */
-    // TODO: should probably move this into led.c and just call led_init() or something like that
-    LED_RED_INIT(1);
-	LED_BLUE_INIT(1);
-	LED_GREEN_INIT(1);
-
-    /* serial debug console setup
-     * To use, call PRINTF("some debug message");
-     */
-    //TODO: need to case this out depending on target... only needed for freedom board
-    BOARD_InitDebugConsole();
-}
 
 int main() {
 
