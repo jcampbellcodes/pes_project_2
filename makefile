@@ -1,30 +1,41 @@
-#SRCS = $(wildcard source/*.c) \
-#       $(wildcard source/pc_implementation/*.c))
-#       
+PC_SRCS = $(wildcard source/*.c) \
+          $(wildcard source/pc_implementation/*.c)
+
+FB_SRCS = $(wildcard source/*.c) \
+          $(wildcard source/fb_implementation/*.c)
+
+PC_OBJS = $(patsubst %.c, build/%.o, $(PC_SRCS))
+FB_OBJS = $(patsubst %.c, build/%.o, $(FB_SRCS))
+
+# used for output and build dir creation
 SUBDIRS := source  source/pc_implementation source/fb_implementation
 OBJDIRS := $(patsubst %, build/%, $(SUBDIRS))
-#
-#OBJS = $(SRCS:.c=.o)
-CC = gcc
-CFLAGS  = -g -Wall -Iinclude
 
+# compiler
+CC = gcc
+
+# flags
+CFLAGS  = -g -Weverything -Wall -Iinclude
+
+# runs all rules
 all: pc_run pc_debug fb_run fb_debug
 
+# dependencies create the output and build dirs and then compile/link all the code 
 pc_run: $(OBJDIRS) make_output_dir output/pc_run 
 fb_run: $(OBJDIRS) make_output_dir output/fb_run 
 pc_debug: $(OBJDIRS) make_output_dir output/pc_debug 
 fb_debug: $(OBJDIRS) make_output_dir output/fb_debug 
 
-output/pc_run: build/source/main.o build/source/pc_implementation/delay.o build/source/pc_implementation/handle_led.o build/source/pc_implementation/setup_teardown.o
+output/pc_run: $(PC_OBJS)
 	$(CC) ${CFLAGS} -o $@ $^ 
 	
-output/pc_debug: build/source/main.o build/source/pc_implementation/delay.o build/source/pc_implementation/handle_led.o build/source/pc_implementation/setup_teardown.o
+output/pc_debug: $(PC_OBJS)
 	$(CC) ${CFLAGS} -DDEBUG -o $@ $^ 
 	
-output/fb_run: build/source/main.o build/source/fb_implementation/delay.o build/source/fb_implementation/handle_led.o build/source/fb_implementation/setup_teardown.o
+output/fb_run: $(FB_OBJS)
 	$(CC) ${CFLAGS} -o $@ $^ 
 	
-output/fb_debug: build/source/main.o build/source/fb_implementation/delay.o build/source/fb_implementation/handle_led.o build/source/fb_implementation/setup_teardown.o
+output/fb_debug: $(FB_OBJS)
 	$(CC) ${CFLAGS} -DDEBUG -o $@ $^ 
 
 # creating the build dir
