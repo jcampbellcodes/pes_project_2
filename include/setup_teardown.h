@@ -5,8 +5,8 @@
 #ifndef PES_PROJECT_2_SETUP_TEARDOWN_H
 #define PES_PROJECT_2_SETUP_TEARDOWN_H
 
-void initialize();
+void initialize(void);
 
-void terminate();
+void terminate(void);
 
 #endif //PES_PROJECT_2_SETUP_TEARDOWN_H

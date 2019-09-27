@@ -42,6 +42,7 @@ int main() {
     enum COLOR ledColor = RED;
     int counter = 0;
 
+
     for(int j = 0; j < NUM_CYCLES; j++)
     {
         for(int i = 0; i < STEPS_PER_CYCLE; i++)

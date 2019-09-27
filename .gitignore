@@ -9,3 +9,4 @@ Debug/
 .project
 .settings/
 *.log
+/Release/

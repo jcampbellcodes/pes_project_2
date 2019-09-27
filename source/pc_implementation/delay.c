@@ -1,7 +1,6 @@
 //
 // Created by Jack Campbell on 2019-09-23.
 //
-
 #include "delay.h"
 #include <time.h> // nanosleep
 

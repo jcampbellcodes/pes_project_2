@@ -4,14 +4,14 @@
 
 #include "setup_teardown.h"
 
-void initialize()
+void initialize(void)
 {
 #ifdef DEBUG
     printf("\nprogram start\n");
 #endif
 }
 
-void terminate()
+void terminate(void)
 {
 #ifdef DEBUG
     printf("\nprogram end\n");
