@@ -19,50 +19,50 @@ void setLed(uint8_t inValue, enum COLOR inColor)
         // toggle led TODO
 	switch(inColor)
 	{
-	case RED:
-	{
-		LED_BLUE_OFF();
-		LED_GREEN_OFF();
-		if(inValue)
+		case RED:
 		{
-			LED_RED_ON();
-		}
-		else
-		{
-			LED_RED_OFF();
-		}
+			LED_BLUE_OFF();
+			LED_GREEN_OFF();
+			if(inValue)
+			{
+				LED_RED_ON();
+			}
+			else
+			{
+				LED_RED_OFF();
+			}
 
-		break;
-	}
-	case GREEN:
-	{
-		LED_BLUE_OFF();
-		if(inValue)
-				{
-					LED_GREEN_ON();
-				}
-				else
-				{
-					LED_GREEN_OFF();
-				}
-		LED_RED_OFF();
-		break;
-	}
-	case BLUE:
-	{
-		if(inValue)
-				{
-					LED_BLUE_ON();
-				}
-				else
-				{
-					LED_BLUE_OFF();
-				}
-		LED_GREEN_OFF();
-		LED_RED_OFF();
-		break;
-	}
-	default:
-		 break;
+			break;
+		}
+		case GREEN:
+		{
+			LED_BLUE_OFF();
+			if(inValue)
+			{
+				LED_GREEN_ON();
+			}
+			else
+			{
+				LED_GREEN_OFF();
+			}
+			LED_RED_OFF();
+			break;
+		}
+		case BLUE:
+		{
+			if(inValue)
+			{
+				LED_BLUE_ON();
+			}
+			else
+			{
+				LED_BLUE_OFF();
+			}
+			LED_GREEN_OFF();
+			LED_RED_OFF();
+			break;
+		}
+		default:
+			 break;
 	}
 }

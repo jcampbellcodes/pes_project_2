@@ -2,11 +2,9 @@ cmake-*
 build/
 output/
 CMSIS/
-Debug/
 *.launch
 *.mex
 .cproject
 .project
 .settings/
 *.log
-/Release/
