@@ -9,7 +9,7 @@
 #define NUM_CYCLES 10
 #define NUM_COLOR_STEPS 3
 #define STEPS_PER_CYCLE 20
-static const int TIMINGS[STEPS_PER_CYCLE] = {
+static const uint64_t TIMINGS[STEPS_PER_CYCLE] = {
         3000,
         1000,
         2000,
@@ -41,7 +41,6 @@ int main() {
     bool ledValue = 1;
     enum COLOR ledColor = RED;
     int counter = 0;
-
 
     for(int j = 0; j < NUM_CYCLES; j++)
     {

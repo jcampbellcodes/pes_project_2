@@ -3,13 +3,24 @@
 //
 #include "delay.h"
 #include <time.h> // nanosleep
+#include <stdio.h>
 
-void delay(int64_t inDelayMs)
+//https://c-for-dummies.com/blog/?p=69
+void delay(uint64_t inDelayMs)
 {
-    struct timespec ts;
-    //calculate delay val to milliseconds
-    ts.tv_sec = (inDelayMs / 1000);
-    ts.tv_nsec = inDelayMs * 1000000;
-    //spin for that time
-    nanosleep(&ts, NULL); // TODO: Verify this is included on FRDM board
+#ifdef DEBUG
+	static int64_t sTotalTime = 0;
+	static int64_t sLastTotalTime = 0;
+	sTotalTime += inDelayMs;
+
+	printf(" %lld %lld\n", sLastTotalTime, sTotalTime - sLastTotalTime);
+	sLastTotalTime = sTotalTime;
+
+#endif
+
+    clock_t now,then;
+    uint64_t pause = inDelayMs*((uint64_t)(CLOCKS_PER_SEC)/1000UL);
+    now = then = clock();
+    while( (now-then) < pause )
+        now = clock();
 }

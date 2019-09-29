@@ -4,19 +4,16 @@
 
 #include "handle_led.h"
 #include "board.h"
-#include <stdio.h>
+#include "fsl_debug_console.h"
 
 void setLed(uint8_t inValue, enum COLOR inColor)
 {
 #ifdef DEBUG
 
         //send UART message: LED ${COLOR} ${STATE} ${CYCLE_NUM} TODO
-
+	PRINTF("\nLED %s %s", COLOR_STRINGS[inColor], STATE_STRINGS[inValue]);
 #endif
 
-	printf("\nLED %s %s", COLOR_STRINGS[inColor], STATE_STRINGS[inValue]);
-
-        // toggle led TODO
 	switch(inColor)
 	{
 		case RED:
@@ -37,6 +34,8 @@ void setLed(uint8_t inValue, enum COLOR inColor)
 		case GREEN:
 		{
 			LED_BLUE_OFF();
+			LED_RED_OFF();
+
 			if(inValue)
 			{
 				LED_GREEN_ON();
@@ -45,11 +44,13 @@ void setLed(uint8_t inValue, enum COLOR inColor)
 			{
 				LED_GREEN_OFF();
 			}
-			LED_RED_OFF();
 			break;
 		}
 		case BLUE:
 		{
+			LED_GREEN_OFF();
+			LED_RED_OFF();
+
 			if(inValue)
 			{
 				LED_BLUE_ON();
@@ -58,8 +59,6 @@ void setLed(uint8_t inValue, enum COLOR inColor)
 			{
 				LED_BLUE_OFF();
 			}
-			LED_GREEN_OFF();
-			LED_RED_OFF();
 			break;
 		}
 		default:

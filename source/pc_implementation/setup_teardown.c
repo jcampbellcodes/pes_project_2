@@ -3,6 +3,7 @@
 //
 
 #include "setup_teardown.h"
+#include <stdio.h>
 
 void initialize(void)
 {

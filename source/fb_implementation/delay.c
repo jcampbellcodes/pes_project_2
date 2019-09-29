@@ -1,18 +1,16 @@
-//
-// Created by Jack Campbell on 2019-09-23.
-//
-#define _POSIX_C_SOURCE 199309L
 #include "delay.h"
-#include <time.h> // nanosleep
+#include "fsl_debug_console.h"
 
-void delay(int64_t inDelayMs)
+// https://community.nxp.com/docs/DOC-94734
+// https://nicopinkowski.wordpress.com/intro-into-arm-cortex-m0-systick-timer/
+void delay(uint64_t inDelayMs)
 {
-	volatile int delayCycles = inDelayMs * 1000;
+#ifdef DEBUG
+
+	PRINTF(" %llu", inDelayMs);
+
+#endif
+	uint64_t delaySeconds = inDelayMs * 1000;
+	volatile int delayCycles = delaySeconds * 48000000UL;
 	while(delayCycles--);
-//    struct timespec ts;
-//    //calculate delay val to milliseconds
-//    ts.tv_sec = (inDelayMs / 1000);
-//    ts.tv_nsec = inDelayMs * 1000000;
-//    //spin for that time
-//    nanosleep(&ts, NULL); // TODO: Verify this is included on FRDM board. We may be able to put this in a "common" section
 }

@@ -7,6 +7,6 @@
 
 #include <stdint.h>
 
-void delay(int64_t inDelayMs);
+void delay(uint64_t inDelayMs);
 
 #endif //PES_PROJECT_2_DELAY_H
