@@ -23,7 +23,6 @@ void delay(uint64_t inDelayMs)
 #ifdef DEBUG
 	PRINTF(" %llu", inDelayMs);
 #endif
-	uint64_t delaySeconds = inDelayMs * 1000;
-	uint64_t delayCycles = inDelayMs*((uint64_t)(48000000UL)/1000UL);
+	uint64_t delayCycles = inDelayMs*((uint64_t)(4800000UL)/1000UL);
 	while(delayCycles--);
 }

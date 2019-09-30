@@ -21,7 +21,7 @@ void set_led(uint8_t inValue, enum COLOR inColor)
 #ifdef DEBUG
 
         //send UART message: LED ${COLOR} ${STATE} ${CYCLE_NUM} TODO
-	PRINTF("\nLED %s %s", COLOR_STRINGS[inColor], STATE_STRINGS[inValue]);
+	PRINTF("\nLED %s %s", COLOR_STRINGS[inColor], inValue ? "ON" : "OFF");
 #endif
 
 	switch(inColor)

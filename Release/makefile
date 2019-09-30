@@ -55,7 +55,7 @@ bin/source/pc_implementation/main.o: ../source/main.c
 
 # Other Targets
 clean:
-	-$(RM) $(EXECUTABLES)$(OBJS)$(C_DEPS) pes_project2.axf output/pc_debug 
+	-$(RM) $(EXECUTABLES)$(OBJS)$(C_DEPS) pes_project2.axf output/pc_debug */*.o */*/*.o */*.su */*/*.su */*.d */*/*.d
 	-@echo ' '
 
 post-build:

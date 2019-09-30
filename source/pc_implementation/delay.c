@@ -15,9 +15,6 @@
  *
  * - Calculating the timestamp formatting using time.h is from:
  *     http://www.cplusplus.com/reference/ctime/strftime/
- *
- * - Writing a time delay using time.h is from Geeks for Geeks:
- *     https://www.geeksforgeeks.org/time-delay-c/
  */
 
 #include "delay.h"
@@ -43,7 +40,7 @@ void delay(uint64_t inDelayMs)
 	sLastTotalTime = sTotalTime;
 #endif
 
-	// https://www.geeksforgeeks.org/time-delay-c/
-    clock_t start_time = clock();
-    while (clock() < start_time + inDelayMs);
+	const uint64_t clocksPerMillisecond = CLOCKS_PER_SEC / 1000UL;
+    uint64_t waitUntil = clock() + inDelayMs*clocksPerMillisecond;
+    while( clock() < waitUntil );
 }
