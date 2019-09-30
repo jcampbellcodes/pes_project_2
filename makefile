@@ -1,6 +1,9 @@
 all: fb_run fb_debug pc_run pc_debug
 
 pc_run:
+	arm-none-eabi-gcc -v
+	arm-none-eabi-ld -v
+	arm-none-eabi-gdb -v
 	cd Release && $(MAKE) output/pc_run
 
 fb_run:

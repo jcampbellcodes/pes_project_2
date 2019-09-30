@@ -5,7 +5,7 @@ PC_OBJS = $(patsubst ../%.c, bin/%.o, $(PC_SRCS)) bin/source/pc_implementation/m
 # compiler
 CC = gcc
 # flags
-CFLAGS  = -g -Weverything -Wall -I../include
+CFLAGS  = -g -Wall -Werror -I../include
 RM := rm -rf
 
 # All of the sources participating in the build are defined here
@@ -29,14 +29,14 @@ fb_debug: output/pes_project2_debug.axf
 
 output/pc_debug: $(PC_OBJS)
 	mkdir -p $(dir $@)
-	$(CC) ${CFLAGS} -DDEBUG -o $@ $^ 
+	$(CC) $(CFLAGS) -DDEBUG -o $@ $^ 
 
 # Tool invocations
 output/pes_project2.axf: $(OBJS) $(USER_OBJS)
 	mkdir -p $(dir $@)
 	@echo 'Building target: $@'
 	@echo 'Invoking: MCU Linker'
-	arm-none-eabi-gcc -nostdlib -Xlinker --gc-sections -Xlinker -Map="pes_project2.map" -Xlinker -print-memory-usage -Xlinker --sort-section=alignment -Xlinker --cref -mcpu=cortex-m0plus -mthumb -T pes_project_2_Debug.ld -o "output/pes_project2.axf" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-none-eabi-gcc -Werror -Wall -nostdlib -Xlinker --gc-sections -Xlinker -Map="pes_project2.map" -Xlinker -print-memory-usage -Xlinker --sort-section=alignment -Xlinker --cref -mcpu=cortex-m0plus -mthumb -T pes_project_2_Debug.ld -o "output/pes_project2.axf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 	$(MAKE) --no-print-directory post-build
@@ -53,7 +53,7 @@ bin/source/pc_implementation/main.o: ../source/main.c
 	
 # Other Targets
 clean:
-	-$(RM) $(EXECUTABLES)$(OBJS)$(C_DEPS)$(PC_OBJS) output/pc_debug output/pes_project2.axf source/pc_implementation/main.o
+	-$(RM) $(EXECUTABLES)$(OBJS)$(C_DEPS)$(PC_OBJS) output/pc_debug output/pes_project2.axf source/pc_implementation/main.o */*.o */*/*.o
 	-@echo ' '
 
 post-build:
