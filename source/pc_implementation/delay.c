@@ -8,12 +8,21 @@
 //https://c-for-dummies.com/blog/?p=69
 void delay(uint64_t inDelayMs)
 {
+
 #ifdef DEBUG
 	static int64_t sTotalTime = 0;
 	static int64_t sLastTotalTime = 0;
 	sTotalTime += inDelayMs;
 
-	printf(" %lld %lld\n", sLastTotalTime, sTotalTime - sLastTotalTime);
+	// figure out time stamp
+	// http://www.cplusplus.com/reference/ctime/strftime/
+	time_t rawtime;
+    struct tm * timeinfo;
+	char buffer [80];
+	time (&rawtime);
+	timeinfo = localtime (&rawtime);
+	strftime (buffer,80,"%T",timeinfo);
+	printf(" %s %lld\n", buffer, sTotalTime - sLastTotalTime);
 	sLastTotalTime = sTotalTime;
 
 #endif
