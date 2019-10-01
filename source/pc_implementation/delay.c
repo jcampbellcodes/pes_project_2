@@ -3,7 +3,7 @@
  * @brief Project 2
  *
  * @details This file contains prototypes for calculating a spin-wait
- *          on various platforms, used for delaying LED state changes.
+ *          on PC, used for delaying LED state changes.
  *
  * @author Jack Campbell
  * @tools  PC Compiler: GNU gcc 8.3.0
@@ -21,6 +21,12 @@
 #include <time.h>
 #include <stdio.h>
 
+/**
+ * delay
+ *
+ * @brief Blocks execution for the specified time.
+ * @param inDelayMs Then time in milliseconds to block.
+ */
 void delay(uint64_t inDelayMs)
 {
 #ifdef DEBUG

@@ -24,9 +24,28 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+/**
+ * NUM_CYCLES
+ *
+ * @brief The number of times to loop through the timing cycles.
+ */
 #define NUM_CYCLES 10
-#define NUM_COLOR_STEPS 3
+
+/**
+ * STEPS_PER_CYCLE
+ *
+ * The number of steps in a single cycle.
+ */
 #define STEPS_PER_CYCLE 20
+
+/**
+ * NUM_COLOR_STEPS
+ *
+ * @brief The number of times to flash a color before cycling to the next.
+ */
+#define NUM_COLOR_STEPS 3
+
+
 
 int main()
 {

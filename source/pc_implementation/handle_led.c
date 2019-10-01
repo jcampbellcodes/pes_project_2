@@ -1,7 +1,10 @@
 /*
+ * @file handle_led.c
  * @brief Project 2
  *
- * @details
+ * @details Contains the prototype for handling LEDs on various platforms.
+ *          On PC, this implementation just prints what the LED state would be
+ *          if an LED was present.
  *
  * @author Jack Campbell
  * @tools  PC Compiler: GNU gcc 8.3.0
@@ -14,6 +17,15 @@
 #include "handle_led.h"
 #include <stdio.h>
 
+/**
+ * set_led
+ *
+ * @brief Sets the LED state.
+ * @details This function will simply print the
+ *          state of what the LED would be.
+ * @param inValue The on/off state of the LED to set.
+ * @param inColor The color of the LED to set.
+ */
 void set_led(uint8_t inValue, enum COLOR inColor)
 {
     printf("\nLED %s %s", COLOR_STRINGS[inColor], inValue ? "ON" : "OFF");

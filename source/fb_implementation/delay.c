@@ -3,7 +3,7 @@
  * @brief Project 2
  *
  * @details This file contains prototypes for calculating a spin-wait
- *          on various platforms, used for delaying LED state changes.
+ *          on the FB, used for delaying LED state changes.
  *
  * @author Jack Campbell
  * @tools  PC Compiler: GNU gcc 8.3.0
@@ -16,13 +16,19 @@
 #include "delay.h"
 #include "fsl_debug_console.h"
 
-// https://community.nxp.com/docs/DOC-94734
-// https://nicopinkowski.wordpress.com/intro-into-arm-cortex-m0-systick-timer/
+/**
+ * delay
+ *
+ * @brief Blocks execution for the specified time.
+ * @param inDelayMs Then time in milliseconds to block.
+ */
 void delay(uint64_t inDelayMs)
 {
 #ifdef DEBUG
 	PRINTF(" %llu", inDelayMs);
 #endif
-	uint64_t delayCycles = inDelayMs*((uint64_t)(4800000UL)/1000UL);
+	const uint64_t CLOCKS_PER_SECOND = 4000000UL;
+	const uint64_t CLOCKS_PER_MILLISECOND = CLOCKS_PER_SECOND / 1000UL;
+	uint64_t delayCycles = inDelayMs * CLOCKS_PER_MILLISECOND;
 	while(delayCycles--);
 }

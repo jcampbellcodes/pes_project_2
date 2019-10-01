@@ -1,7 +1,8 @@
 /*
+ * @file setup_teardown.c
  * @brief Project 2
  *
- * @details
+ * @details Initializes the LEDs, board, and debug console.
  *
  * @author Jack Campbell
  * @tools  PC Compiler: GNU gcc 8.3.0
@@ -20,6 +21,14 @@
 #include "pin_mux.h"
 #include "clock_config.h"
 
+/**
+ * initialize
+ *
+ * @details Initializes the LEDs, board, and debug console.
+ *          Print "program start" in debug builds.
+ *          Shows that the program successfully started.
+ *
+ */
 void initialize()
 {
 	/* board setup */
@@ -32,15 +41,24 @@ void initialize()
 	LED_BLUE_INIT(1);
 	LED_GREEN_INIT(1);
 
+
+
+#ifdef DEBUG
 	/* serial debug console setup: use PRINTF("debug msg"); */
 	BOARD_InitDebugConsole();
 
-#ifdef DEBUG
 	PRINTF("program start");
 #endif
 
 }
 
+/**
+ * terminate
+ *
+ * @details Print "program end" in debug builds.
+ *          Shows that the program successfully completed.
+ *
+ */
 void terminate()
 {
 #ifdef DEBUG

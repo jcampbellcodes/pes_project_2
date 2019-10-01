@@ -1,7 +1,9 @@
 /*
+ * @file setup_teardown.c
  * @brief Project 2
  *
- * @details
+ * @details On PC, there is no setup and teardown to be done, but
+ *          we print program start and end in debug builds.
  *
  * @author Jack Campbell
  * @tools  PC Compiler: GNU gcc 8.3.0
@@ -14,6 +16,12 @@
 #include "setup_teardown.h"
 #include <stdio.h>
 
+/**
+ * initialize
+ *
+ * @brief Print "program start" in debug builds. Shows that the program successfully started.
+ *
+ */
 void initialize(void)
 {
 #ifdef DEBUG
@@ -21,6 +29,12 @@ void initialize(void)
 #endif
 }
 
+/**
+ * terminate
+ *
+ * @brief Print "program end" in debug builds. Shows that the program successfully completed.
+ *
+ */
 void terminate(void)
 {
 #ifdef DEBUG

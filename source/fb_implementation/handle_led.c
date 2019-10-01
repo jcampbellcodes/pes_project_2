@@ -1,7 +1,10 @@
 /*
+ * @file handle_led.c
  * @brief Project 2
  *
- * @details
+ * @details Contains the prototype for handling LEDs on the FB.
+ *          In this implementation, we print debug info in debug builds
+ *          and flash the LED either way.
  *
  * @author Jack Campbell
  * @tools  PC Compiler: GNU gcc 8.3.0
@@ -16,6 +19,15 @@
 #include "board.h"
 #include "fsl_debug_console.h"
 
+/**
+ * set_led
+ *
+ * @brief Sets the LED state.
+ * @details This function controls a physical LED and prints
+ *          debug info over UART on debug builds.
+ * @param inValue The on/off state of the LED to set.
+ * @param inColor The color of the LED to set.
+ */
 void set_led(uint8_t inValue, enum COLOR inColor)
 {
 #ifdef DEBUG
