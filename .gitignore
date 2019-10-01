@@ -1,7 +1,6 @@
 cmake-*
 build/
 output/
-CMSIS/
 *.launch
 *.mex
 .cproject
