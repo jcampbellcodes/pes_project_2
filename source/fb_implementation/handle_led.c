@@ -15,9 +15,12 @@
  *         ARM Debugger: GNU gdb 8.2.50.20181213-git
  */
 
+#include <stdint.h>
 #include "handle_led.h"
 #include "board.h"
 #include "fsl_debug_console.h"
+#include "fsl_gpio.h"
+#include "MKL25Z4.h"
 
 /**
  * set_led
@@ -31,8 +34,7 @@
 void set_led(uint8_t inValue, enum COLOR inColor)
 {
 #ifdef DEBUG
-
-        //send UART message: LED ${COLOR} ${STATE} ${CYCLE_NUM} TODO
+	GPIO_TogglePinsOutput(GPIOD, 1U << 7U);
 	PRINTF("\nLED %s %s", COLOR_STRINGS[inColor], inValue ? "ON" : "OFF");
 #endif
 

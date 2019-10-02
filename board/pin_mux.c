@@ -20,6 +20,7 @@ board: FRDM-KL25Z
 #include "fsl_common.h"
 #include "fsl_port.h"
 #include "pin_mux.h"
+#include "fsl_gpio.h"
 
 /* FUNCTION ************************************************************************************************************
  *
@@ -62,6 +63,14 @@ void BOARD_InitPins(void)
     /* Port D Clock Gate Control: Clock enabled */
     CLOCK_EnableClock(kCLOCK_PortD);
 
+    /* DEBUG GPIO pin on Port D Pin 7 */
+    gpio_pin_config_t gpiod_pin80_config = {
+            .pinDirection = kGPIO_DigitalOutput,
+            .outputLogic = 1U
+        };
+        /* Initialize GPIO functionality on pin PTD7 (pin 80)  */
+        GPIO_PinInit(GPIOD, 7U, &gpiod_pin80_config);
+
     /* PORTA1 (pin 27) is configured as UART0_RX */
     PORT_SetPinMux(BOARD_INITPINS_DEBUG_UART_RX_PORT, BOARD_INITPINS_DEBUG_UART_RX_PIN, kPORT_MuxAlt2);
 
@@ -76,6 +85,9 @@ void BOARD_InitPins(void)
 
     /* PORTD1 (pin 74) is configured as PTD1 */
     PORT_SetPinMux(BOARD_INITPINS_LED_BLUE_PORT, BOARD_INITPINS_LED_BLUE_PIN, kPORT_MuxAsGpio);
+
+    /* PORTD7 (pin 80) is configured as PTD7 */
+	PORT_SetPinMux(PORTD, 7U, kPORT_MuxAsGpio);
 
     SIM->SOPT5 = ((SIM->SOPT5 &
                    /* Mask bits to zero which are setting */
