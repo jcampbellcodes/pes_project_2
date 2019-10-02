@@ -16,6 +16,10 @@
 #include "delay.h"
 #include "fsl_debug_console.h"
 
+/* GLOBALS */
+const uint64_t CLOCKS_PER_MILLISECOND = 2600UL;
+const uint64_t PRINTF_OFFSET = 900UL;
+
 /**
  * delay
  *
@@ -24,11 +28,14 @@
  */
 void delay(uint64_t inDelayMs)
 {
+	volatile uint64_t number = inDelayMs * CLOCKS_PER_MILLISECOND;
 #ifdef DEBUG
 	PRINTF(" %llu", inDelayMs);
+	number -= PRINTF_OFFSET;
 #endif
-	const uint64_t CLOCKS_PER_SECOND = 4000000UL;
-	const uint64_t CLOCKS_PER_MILLISECOND = CLOCKS_PER_SECOND / 1000UL;
-	uint64_t delayCycles = inDelayMs * CLOCKS_PER_MILLISECOND;
-	while(delayCycles--);
+
+	while(number--)
+	{
+		__asm volatile ("nop");
+	}
 }
